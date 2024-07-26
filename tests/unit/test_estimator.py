@@ -4405,7 +4405,7 @@ def test_register_default_image_without_instance_type_args(sagemaker_session):
     framework = "TENSORFLOW"
     framework_version = "2.9"
     nearest_model_name = "resnet50"
-
+    model_card = {"ModelCardStatus": ModelCardStatusEnum.DRAFT, "ModelCardContent": "{}"}
     estimator.register(
         content_types=content_types,
         response_types=response_types,
@@ -4428,6 +4428,7 @@ def test_register_default_image_without_instance_type_args(sagemaker_session):
         "marketplace_cert": False,
         "sample_payload_url": sample_payload_url,
         "task": task,
+        "model_card": model_card,
     }
     sagemaker_session.create_model_package_from_containers.assert_called_with(
         **expected_create_model_package_request
@@ -4457,6 +4458,7 @@ def test_register_inference_image(sagemaker_session):
     framework = "TENSORFLOW"
     framework_version = "2.9"
     nearest_model_name = "resnet50"
+    model_card = {"ModelCardStatus": ModelCardStatusEnum.DRAFT, "ModelCardContent": "{}"}
 
     estimator.register(
         content_types=content_types,
@@ -4483,6 +4485,7 @@ def test_register_inference_image(sagemaker_session):
         "marketplace_cert": False,
         "sample_payload_url": sample_payload_url,
         "task": task,
+        "model_card": model_card,
     }
     sagemaker_session.create_model_package_from_containers.assert_called_with(
         **expected_create_model_package_request
